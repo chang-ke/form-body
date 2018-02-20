@@ -1,0 +1,20 @@
+{
+  "name": "form-body",
+  "version": "0.0.2",
+  "description": "formData parse and save file",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "busboy": "^0.2.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "form",
+    "file",
+    "parse"
+  ],
+  "author": "dengbin",
+  "license": "MIT"
+}
