@@ -72,14 +72,14 @@
       return new Promise((resolve, reject) => {
         // 解析请求文件事件
         busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
-          let {nameRule} = options;
+          let {rule} = options;
           let fileName = fieldname;
           index += 1;
-          if (typeof nameRule === "function") {
-            if (!nameRule()) {
+          if (typeof rule === "function") {
+            if (!rule()) {
               fileName = `${defaultRule(fieldname, index)}.${getSuffixName(filename)}`;
             } else {
-              fileName = `${nameRule(fieldname, index)}.${getSuffixName(filename)}`;
+              fileName = `${rule(fieldname, index)}.${getSuffixName(filename)}`;
             }
           }
           let saveTo = path.join(filePath, fileName);

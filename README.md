@@ -16,7 +16,7 @@ const result = await formBody({
   ctx: ctx,
   path: path.join(__dirname, "../static"),
   dir: "/",
-  nameRule: function() {
+  rule: function() {
     return false;
   }
 });
@@ -30,7 +30,7 @@ console.log(result); //[{ success: true,
 
 * `ctx` koa上下文 ( koa context )
 * `dir` 文件存储文件夹名称, 默认使用当前文件夹, 如果文件夹不存在则会自动创建 ( directory's name, if it's not exits, it will be created ) `default: '/'`
-* `nameRule` 文件命名规则, 如果不存在则会使用如下默认规则 ( the rule for file's name, if it's not exits, it will be use the follow function )
+* `rule` 文件命名规则, 如果不存在则会使用如下默认规则 ( the rule for file's name, if it's not exits, it will be use the follow function )
 ```
 function defaultRule(filename, index) {
     const timestamp = Date.now();
