@@ -1,6 +1,7 @@
 
-#form-body
-Parse formData for koa2 with Promise
+# form-body
+Parse `multipart` for koa2 with Promise, based on busboy  [github](https://github.com/danmin25/form-body)<br>
+**support for formData and blob(image)**
 
 ## Installation
 
@@ -26,7 +27,7 @@ console.log(result); //[{ success: true,
                      //    path:'E:\\Node\\koa\\static\\effffc74854cf92042b78bad9bec1c77.png' }
                      //  }]
 ```
-## params
+## Params
 
 * `ctx` koa上下文 ( koa context )
 * `dir` 文件存储文件夹名称, 默认使用当前文件夹, 如果文件夹不存在则会自动创建 ( directory's name, if it's not exits, it will be created ) `default: '/'`

@@ -1,6 +1,6 @@
 {
   "name": "form-body",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "formData parse and save file",
   "main": "./lib/index.js",
   "dependencies": {
@@ -9,12 +9,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/danmin25/form-body#readme",
+  "author": {
+    "name": "danmin25",
+    "email": "315764194@qq.com"
+  },
+  "bugs": {
+    "url": "https://github.com/koajs/body-parser/issues"
+  },
   "keywords": [
     "koa",
     "form",
     "file",
     "parse"
   ],
-  "author": "dengbin",
   "license": "MIT"
 }

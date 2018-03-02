@@ -1,5 +1,5 @@
 (function() {
-  const {inspect} = require("util");
+  const { inspect } = require("util");
   const path = require("path");
   const os = require("os");
   const fs = require("fs");
@@ -42,7 +42,7 @@
    */
   function getSuffixName(fileName) {
     let nameList = fileName.split(".");
-    return nameList[nameList.length - 1];
+    return fileName === "blob" ? "png" : nameList[nameList.length - 1];
   }
 
   /**
@@ -55,14 +55,12 @@
       if (typeof options.ctx === "undefined" || typeof options.path === "undefined") {
         const ctxError = options.ctx === undefined ? "ctx" : "";
         const pathError = options.path === undefined ? "path" : "";
-        throw new Error(`${ctxError} ${pathError} is required`);
-        return new Promise((resolve, reject) => {
-          reject(`${ctxError} ${pathError} is required`);
-        });
+        throw new ReferenceError(`${ctxError} ${pathError} is not defined`);
+        return Promise.reject(`${ctxError} ${pathError} is not defined`);
       }
       const req = options.ctx.req;
       const res = options.ctx.res;
-      const busboy = new Busboy({headers: req.headers});
+      const busboy = new Busboy({ headers: req.headers });
       let index = 0;
       // 获取类型
       let dir = options.dir || "/";
@@ -72,14 +70,14 @@
       return new Promise((resolve, reject) => {
         // 解析请求文件事件
         busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
-          let {rule} = options;
+          let { nameRule } = options;
           let fileName = fieldname;
           index += 1;
-          if (typeof rule === "function") {
-            if (!rule()) {
+          if (typeof nameRule === "function") {
+            if (!nameRule()) {
               fileName = `${defaultRule(fieldname, index)}.${getSuffixName(filename)}`;
             } else {
-              fileName = `${rule(fieldname, index)}.${getSuffixName(filename)}`;
+              fileName = `${nameRule(fieldname, index)}.${getSuffixName(filename)}`;
             }
           }
           let saveTo = path.join(filePath, fileName);
