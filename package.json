@@ -21,7 +21,9 @@
     "koa",
     "form",
     "file",
-    "parse"
+    "parse",
+    "blob",
+    "multipart"
   ],
   "license": "MIT"
 }

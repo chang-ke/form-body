@@ -40,9 +40,9 @@
    * @param  {string} fileName 获取上传文件的后缀名
    * @return {string}          文件后缀名
    */
-  function getSuffixName(fileName) {
+  function getSuffixName(fileName, mimeType) {
     let nameList = fileName.split(".");
-    return fileName === "blob" ? "png" : nameList[nameList.length - 1];
+    return fileName === "blob" ? mimeType.split("/")[1] : nameList[nameList.length - 1];
   }
 
   /**
@@ -75,9 +75,9 @@
           index += 1;
           if (typeof nameRule === "function") {
             if (!nameRule()) {
-              fileName = `${defaultRule(fieldname, index)}.${getSuffixName(filename)}`;
+              fileName = `${defaultRule(fieldname, index)}.${getSuffixName(filename, mimetype)}`;
             } else {
-              fileName = `${nameRule(fieldname, index)}.${getSuffixName(filename)}`;
+              fileName = `${nameRule(fieldname, index)}.${getSuffixName(filename, mimetype)}`;
             }
           }
           let saveTo = path.join(filePath, fileName);
