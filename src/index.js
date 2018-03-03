@@ -28,11 +28,10 @@
    */
   function defaultRule(filename, index) {
     const timestamp = Date.now();
-    const md5 = crypto
+    return crypto
       .createHash("md5")
       .update(timestamp + filename + index)
       .digest("hex");
-    return md5;
   }
 
   /**
@@ -55,23 +54,21 @@
       if (typeof options.ctx === "undefined" || typeof options.path === "undefined") {
         const ctxError = options.ctx === undefined ? "ctx" : "";
         const pathError = options.path === undefined ? "path" : "";
-        throw new ReferenceError(`${ctxError} ${pathError} is not defined`);
-        return Promise.reject(`${ctxError} ${pathError} is not defined`);
+        return Promise.reject(new ReferenceError(`${ctxError} ${pathError} is not defined`));
       }
-      const req = options.ctx.req;
-      const res = options.ctx.res;
+      const { req, res } = options.ctx;
       const busboy = new Busboy({ headers: req.headers });
-      let index = 0;
-      // 获取类型
-      let dir = options.dir || "/";
-      let filePath = path.join(options.path, dir);
-      let mkdirResult = mkdirsSync(filePath);
       const result = [];
+      const dir = options.dir || "/";
+      const filePath = path.join(options.path, dir);
+      const mkdirResult = mkdirsSync(filePath);
+      let index = 0;
+
       return new Promise((resolve, reject) => {
         // 解析请求文件事件
         busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
-          let { nameRule } = options;
-          let fileName = fieldname;
+          const { nameRule } = options;
+          const fileName = fieldname;
           index += 1;
           if (typeof nameRule === "function") {
             if (!nameRule()) {
@@ -80,16 +77,16 @@
               fileName = `${nameRule(fieldname, index)}.${getSuffixName(filename, mimetype)}`;
             }
           }
-          let saveTo = path.join(filePath, fileName);
+          const fileSavePath = path.join(filePath, fileName);
           // 文件保存到制定路径
-          file.pipe(fs.createWriteStream(saveTo));
+          file.pipe(fs.createWriteStream(fileSavePath));
           // 单个文件写入事件结束
           file.on("end", function() {
             result.push({
               success: true,
               file: {
                 name: fileName,
-                path: saveTo
+                path: fileSavePath
               }
             });
           });
