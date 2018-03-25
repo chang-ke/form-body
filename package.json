@@ -1,6 +1,6 @@
 {
   "name": "form-body",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "formData parse and save file",
   "main": "./lib/index.js",
   "dependencies": {
@@ -17,13 +17,10 @@
   "bugs": {
     "url": "https://github.com/danmin25/form-body/issues"
   },
-  "keywords": [
-    "koa",
-    "form",
-    "file",
-    "parse",
-    "blob",
-    "multipart"
-  ],
+  "keywords": ["koa", "form", "file", "parse", "blob", "multipart"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danmin25/form-body.git"
+  },
   "license": "MIT"
 }

@@ -1,6 +1,6 @@
 
 # form-body
-Parse `multipart` for Koa2 with Promise, based on busboy  [github](https://github.com/danmin25/form-body) **support for formData and blob**
+Parse `multipart` for Koa2 with Promise, based on busboy  [github](https://github.com/danmin25/form-body) ` support for formData and blob `
 
 ## Installation
 
