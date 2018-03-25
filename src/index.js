@@ -81,7 +81,7 @@
         // 解析请求文件事件
         busboy.on("file", function(fieldname, file, filename, encoding, mimetype) {
           const { rule } = options;
-          const fileName = fieldname;
+          let fileName = fieldname;
           index += 1;
           if (typeof rule === "function") {
             if (rule(fieldname, index)) {
